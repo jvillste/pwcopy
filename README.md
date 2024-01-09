@@ -9,8 +9,8 @@ intactivity.
 
 Install Bitwarden CLI and Clojure.
 
-Create a keychain called "secret" with keychain app. Set it to lock
-after 5 minutes of inactivity.
+Create a keychain called "secret" with the keychain app. Set it to
+lock after 5 minutes of inactivity.
 
 Optionally add symlink to your `~/bin` with `ln -s <path to this repository>/pwcopy ~/bin/pwcopy`.
 
