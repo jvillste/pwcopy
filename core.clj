@@ -7,10 +7,10 @@
 (def bitwarden-account "bitwarden")
 
 (defn store-password-to-keychain [account password]
-  (process/shell (str "security add-internet-password -U -s 'system' -a '" account "' -w '" password "' '~/Library/Keychains/secret.keychain-db'")))
+  (process/shell {:out :string :err :string} (str "security add-internet-password -U -s 'system' -a '" account "' -w '" password "' '" (System/getProperty "user.home") "/Library/Keychains/secret.keychain-db'")))
 
 (defn get-password-from-key-chain [account]
-  (string/trim (:out (process/sh (str "security find-internet-password -s 'system' -a '" account "' -w '~/Library/Keychains/secret.keychain-db'")))))
+  (string/trim (:out (process/shell {:out :string :err :string} (str "security find-internet-password -s 'system' -a '" account "' -w '" (System/getProperty "user.home") "/Library/Keychains/secret.keychain-db'")))))
 
 (defn get-new-session-key []
   (string/trim (:out (process/shell {:out :string} "bw unlock --raw" ))))
