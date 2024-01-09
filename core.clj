@@ -16,6 +16,7 @@
   (string/trim (:out (process/shell {:out :string} "bw unlock --raw" ))))
 
 (defn get-password-from-bitwarden [id]
+  (process/shell (str "bw sync"))
   (:out (process/sh (str "bw get password " id " --session " (get-password-from-key-chain bitwarden-account)))))
 
 (defn notify-completion! []
