@@ -48,11 +48,16 @@
   (write-to-clipboard (get-password-from-key-chain password-id))
   (notify-completion!))
 
+(defn hello-world
+  "use for testing clojure startup time"
+  []
+  (println "hello world"))
 
 (def commands [#'store-new-bitwarden-session-key-to-keychain
                #'copy-password-from-bitwarden-to-clipboard
                #'copy-password-from-bitwarden-to-keychain
-               #'copy-password-from-keychain-to-clipboard])
+               #'copy-password-from-keychain-to-clipboard
+               #'hello-world])
 
 (defn -main [& command-line-arguments]
   (let [[command-name & arguments] command-line-arguments]
