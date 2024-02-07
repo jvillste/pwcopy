@@ -36,6 +36,13 @@
   []
   (store-password-to-keychain bitwarden-account (get-new-session-key)))
 
+(defn store-new-password-to-keychain [password-id]
+  "asks the password when the command is run"
+  (store-password-to-keychain password-id
+                              (String/valueOf (.readPassword (System/console)
+                                                             "Password:"
+                                                             nil))))
+
 (defn copy-password-from-bitwarden-to-clipboard [password-id]
   (write-to-clipboard (get-password-from-bitwarden password-id))
   (notify-completion!))
@@ -54,6 +61,7 @@
   (println "hello world"))
 
 (def commands [#'store-new-bitwarden-session-key-to-keychain
+               #'store-new-password-to-keychain
                #'copy-password-from-bitwarden-to-clipboard
                #'copy-password-from-bitwarden-to-keychain
                #'copy-password-from-keychain-to-clipboard
